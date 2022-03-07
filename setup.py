@@ -15,8 +15,11 @@ setup(
     include_package_data=True,
     license="MIT",
     package_dir={"": "src"},
-    url="",
-    project_urls={"Issues": "", "Documentation": ""},
+    url="https://github.com/lavriv92/haudi",
+    project_urls={
+        "Issues": "https://github.com/lavriv92/haudi/issues",
+        "Documentation": "",
+    },
     packages=find_packages(where="src"),
     python_requires=">=3.6",
 )
