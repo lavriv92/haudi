@@ -22,9 +22,6 @@ class ModelMeta(type):
             if getattr(method, "__validated_field__", None) == field_name
         )    
         
-    def __setattr__(self, *args, **kwargs):
-        print('args: ', args)
-        print('kwargs:', kwargs)
 
     def __call__(self, *args, **kwargs):
         errors = defaultdict(list)

@@ -1,11 +1,9 @@
 import sys
 from pathlib import Path
 
+BASE_PATH = Path(".").absolute()
 
-sys.path.append(str(Path(".").absolute()))
-
-
-# path for haudi will be added dynamic
+sys.path.append(str(BASE_PATH / "src"))
 
 from haudi import BaseModel, ValidationError
 
