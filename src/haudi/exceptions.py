@@ -1,5 +1,5 @@
 class ValidationError(Exception):
-    def __init__(self, message, error_messages = {}):
+    def __init__(self, message, error_messages={}):
         self.__error_messages = error_messages
         self.message = message
 
@@ -11,7 +11,9 @@ class ValidationError(Exception):
 
     @property
     def json(self):
-        return { k: [ str(e) for e in v ] for k, v in self.__error_messages.items() }
+        return {
+            k: [str(e) for e in v] for k, v in self.__error_messages.items()
+        }
 
 
 class InvalidQuery(Exception):
@@ -27,7 +29,7 @@ class UnsupportableLookup(Exception):
 
 
 class ModelIsNotExists(Exception):
-   pass
+    pass
 
 
 class IsNotModel(Exception):

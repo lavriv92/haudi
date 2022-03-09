@@ -3,10 +3,8 @@ class RelationField:
         self.__value = None
         self.relation_model = relation_model
 
-    def __get__(self, obj, objtype = None):
+    def __get__(self, obj, objtype=None):
         return self.__value
-        
+
     def __set__(self, obj, value):
         self.__value = value
-        
-    

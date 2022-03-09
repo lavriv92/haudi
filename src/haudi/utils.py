@@ -2,7 +2,9 @@ from typing import get_origin, get_args, Union
 
 
 def isoptional(annotation):
-    return get_origin(annotation) is Union and type(None) in get_args(annotation)
+    return get_origin(annotation) is Union and type(None) in get_args(
+        annotation
+    )
 
 
 def get_origin_type(annotation):

@@ -7,6 +7,8 @@ name = "pypi"
 
 [dev-packages]
 black = "*"
+jedi = "*"
+epc = "*"
 
 [requires]
 python_version = "3.9"
