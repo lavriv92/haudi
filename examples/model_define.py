@@ -35,7 +35,7 @@ def main():
 
         post.save()
 
-        print(post)
+        print("Saved post: ", post.dict)
     except ValidationError as e:
         print(e.json)
 
