@@ -20,8 +20,7 @@ class ModelMeta(type):
             method
             for method in self.__class_variables.values()
             if getattr(method, "__validated_field__", None) == field_name
-        )    
-        
+        )
 
     def __call__(self, *args, **kwargs):
         errors = defaultdict(list)
@@ -59,9 +58,7 @@ class ModelMeta(type):
                     continue
 
         if errors:
-            raise ValidationError(
-                "Invalid data", error_messages=errors
-            )
+            raise ValidationError("Invalid data", error_messages=errors)
 
         return super().__call__(*args, **kwargs)
 

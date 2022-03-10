@@ -4,7 +4,6 @@ from setuptools import setup, find_packages
 BASE_DIR = pathlib.Path(__file__).parent
 README = (BASE_DIR / "README.md").read_text()
 
-
 setup(
     name="haudi",
     version="0.0.1",
