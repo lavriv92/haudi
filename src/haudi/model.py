@@ -11,6 +11,20 @@ class ModelMeta(type):
     def __class_variables(self) -> dict:
         return vars(self)
 
+    def __new__(cls, class_name, bases, attrs):
+        instance = super().__new__(cls, class_name, bases, attrs)
+        custom_validations = defaultdict(list)
+
+        for field in vars(instance).values():
+            field_name = getattr(field, "__validated_field__", None)
+
+            if field_name is not None:
+                custom_validations[field_name].append(field)
+
+        instance.__validations__ = custom_validations
+
+        return instance
+
     @property
     def __field_annotations(self) -> dict:
         return self.__class_variables.get("__annotations__", {})
@@ -65,9 +79,8 @@ class ModelMeta(type):
 
 class BaseModel(metaclass=ModelMeta):
     def __init__(self, **kwargs):
-        self.id = None
-        for key, val in kwargs.items():
-            setattr(self, key, val)
+        for k, v in kwargs.items():
+            setattr(self, k, v)
 
     @property
     def dict(self):
@@ -76,3 +89,13 @@ class BaseModel(metaclass=ModelMeta):
     @property
     def json(self):
         return json.dumps(self.dict)
+
+    def __setattr__(self, key, value):
+        print("key", key)
+        print("value", value)
+        print("validations: ", self.__validations__)
+
+        for validator in self.__validations__[key]:
+            validator(self, value)
+
+        super().__setattr__(key, value)
