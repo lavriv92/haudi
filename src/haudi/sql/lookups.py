@@ -44,7 +44,7 @@ def lookup_contains(field: str, value):
     return f"{field} LIKE %{value}%"
 
 
-lookups = {
+LOOKUPS = {
     "in": lookup_in,
     "gt": lookup_gt,
     "lt": lookup_lt,
@@ -64,7 +64,7 @@ def is_lookup(field: str):
 
 def lookup(field: str, value):
     raw_field, prefix = field.split("__")
-    lookup_func = lookups.get(prefix)
+    lookup_func = LOOKUPS.get(prefix)
 
     if not lookup_func:
         raise UnsupportableLookup("lookup __{prefix} is unsupportable")

@@ -1,4 +1,5 @@
 from ..exceptions import InvalidQuery
+from ..utils import format_insertion_value
 from .conditions import normalize_conditions
 
 
@@ -12,7 +13,15 @@ class QueryBuilder:
 
         return self
 
-    def create(self):
+    def create(self, item):
+        keys = ", ".join(item.keys())
+        values = ", ".join([format_insertion_value(v) for v in item.values()])
+
+        # Ensure that creation is vorking correnct
+        self.__segments.append(
+            f"INSERT INTO {self.model.__name__}({keys}) VALUES({values})"
+        )
+
         return self
 
     def where(self, **conditions):

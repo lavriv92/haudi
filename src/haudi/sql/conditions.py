@@ -8,6 +8,6 @@ def normalize_conditions(conditions: dict):
         if is_lookup(field):
             normalized_conditions.append(condition)
         else:
-            normalized_conditions.append(f"{field}={value}")
+            normalized_conditions.append(f"{field}={condition}")
 
     return " AND ".join(normalized_conditions)

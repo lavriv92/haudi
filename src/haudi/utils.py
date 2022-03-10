@@ -26,3 +26,10 @@ def get_tablename(model):
         return model.__tablename__
 
     return model.__name__
+
+
+def format_insertion_value(value):
+    if value in (int, float):
+        return str(value)
+
+    return f"{value!r}"
