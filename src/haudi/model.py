@@ -91,10 +91,6 @@ class BaseModel(metaclass=ModelMeta):
         return json.dumps(self.dict)
 
     def __setattr__(self, key, value):
-        print("key", key)
-        print("value", value)
-        print("validations: ", self.__validations__)
-
         for validator in self.__validations__[key]:
             validator(self, value)
 
