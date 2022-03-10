@@ -30,8 +30,16 @@ class BaseModel(metaclass=ModelMeta):
     errors: defaultdict = defaultdict(list)
 
     def __init__(self, **kwargs):
-        for k, v in kwargs.items():
-            setattr(self, k, v)
+        for key, value in kwargs.items():
+            setattr(self, key, value)
+
+    @property
+    def __available_keys(self):
+        annotations = vars(self.__class__).get("__annotations", {}).keys()
+
+    def __field_is_available(self, keys):
+        # Implement better code
+        return all([key in self.__available_keys for key in keys])
 
     def __setattr__(self, key, value):
         for validator in self.__validations__[key]:

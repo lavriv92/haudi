@@ -4,9 +4,9 @@ from .conditions import normalize_conditions
 
 
 class QueryBuilder:
-    def __init__(self, model):
+    def __init__(self, table_name):
         self.__segments = []
-        self.model = model
+        self.__table_name = table_name
 
     def query(self, *fields):
         # Implement query
@@ -19,7 +19,7 @@ class QueryBuilder:
 
         # Ensure that creation is vorking correnct
         self.__segments.append(
-            f"INSERT INTO {self.model.__name__}({keys}) VALUES({values})"
+            f"INSERT INTO {self.__table_name}({keys}) VALUES({values})"
         )
 
         return self
@@ -44,7 +44,7 @@ class QueryBuilder:
         if not self.__segments:
             raise InvalidQuery("Query should not be started from OFFSET")
 
-        self.__segments.append(f"OFFSET {limit}")
+        self.__segments.append(f"OFFSET {skip_elements_count}")
 
         return self
 
